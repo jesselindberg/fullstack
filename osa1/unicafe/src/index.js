@@ -11,15 +11,9 @@ const App = () => {
     <div>
       <Header header='give feedback' />
       <div>
-        <button onClick={() => setGood(good + 1)}>
-          good
-        </button>
-        <button onClick={() => setNeutral(neutral + 1)}>
-          neutral
-        </button>
-        <button onClick={() => setBad(bad + 1)}>
-          bad
-        </button>
+        <Button name="good" onClick={() => setGood(good + 1)} />
+        <Button name="neutral" onClick={() => setNeutral(neutral + 1)} />
+        <Button name="bad" onClick={() => setBad(bad + 1)} />
       </div>
       <Header header='statistics' />
       <Statistics good={good} neutral={neutral} bad={bad} />
@@ -33,6 +27,14 @@ const Header = (props) => {
   )
 }
 
+const Button = (props) => {
+  return (
+    <button onClick={props.onClick}>
+      {props.name}
+    </button>
+  )
+}
+
 const Statistics = (props) => {
   console.log(props)
   let { good, neutral, bad } = props
@@ -42,12 +44,12 @@ const Statistics = (props) => {
   if (all > 0) {
     return (
       <div>
-        <p>good {good}</p>
-        <p>neutral {neutral}</p>
-        <p>bad {bad}</p>
-        <p>all {all}</p>
-        <p>average {average}</p>
-        <p>positive {positive}</p>
+        <StatisticLine text="good" value={good} />
+        <StatisticLine text="neutral" value={neutral} />
+        <StatisticLine text="bad" value={bad} />
+        <StatisticLine text="all" value={all} />
+        <StatisticLine text="average" value={average} />
+        <StatisticLine text="positive" value={positive} />
       </div>
     )
   } else {
@@ -55,6 +57,12 @@ const Statistics = (props) => {
       <p>No feedback given</p>
     )
   }
+}
+
+const StatisticLine = (props) => {
+  return (
+    <p>{props.text} {props.value}</p>
+  )
 }
 
 ReactDOM.render(<App />,
