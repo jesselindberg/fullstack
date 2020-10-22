@@ -6,10 +6,9 @@ const App = (props) => {
   const [selected, setSelected] = useState(0)
   const [points, setPoints] = useState(new Array(anecdotes.length).fill(0))
 
-  console.log(points)
-
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <div>
         {props.anecdotes[selected]}
       </div>
@@ -24,6 +23,10 @@ const App = (props) => {
           const index =  Math.floor(Math.random() * anecdotes.length)
           setSelected(index)
         }}>next anecdote</button>
+      </div>
+      <h1>Anecdote with the most votes</h1>
+      <div>
+        {props.anecdotes[points.indexOf(Math.max(...points))]}
       </div>
     </div>
   )
